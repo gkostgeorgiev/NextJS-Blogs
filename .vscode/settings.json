@@ -1,8 +1,7 @@
 {
-  "window.zoomLevel": 0,
-  "workbench.colorCustomizations": {
-    "activityBar.background": "#042770",
-    "titleBar.activeBackground": "#05379D",
-    "titleBar.activeForeground": "#FBFCFF"
-  }
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#103327",
+        "titleBar.activeBackground": "#164837",
+        "titleBar.activeForeground": "#F4FBF9"
+    }
 }
