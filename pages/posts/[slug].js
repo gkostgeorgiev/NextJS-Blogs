@@ -7,12 +7,9 @@ function PostDetailPage(props) {
 
 export function getStaticProps(context) {
   const { params } = context;
-  console.log(params);
   const { slug } = params;
-  console.log(slug);
 
   const postData = getPostData(slug);
-  console.log(postData);
 
   return {
     props: {
@@ -24,10 +21,8 @@ export function getStaticProps(context) {
 
 export function getStaticPaths() {
   const postFileNames = getPostsFiles();
-  console.log(postFileNames);
 
   const slugs = postFileNames.map((fileName) => fileName.replace(/\.md$/, ""));
-  console.log(slugs);
 
   return {
     paths: slugs.map((slug) => ({
