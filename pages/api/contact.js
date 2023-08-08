@@ -1,4 +1,9 @@
-function handler(req, res) {
+import { MongoClient } from "mongodb";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+async function handler(req, res) {
   const { email, name, message } = req.body;
 
   if (req.method === "POST") {
@@ -21,6 +26,29 @@ function handler(req, res) {
     name,
     message,
   };
+
+  let client;
+
+  try {
+    client = await MongoClient.connect(process.env.MONGODB_URI);
+    if (client);
+    console.log("Db connected");
+  } catch (err) {
+    console.log("Could not connect to client");
+    res.status(500).json({ message: err.message });
+  }
+
+  try {
+    const db = client.db('Messages');
+    const result = await db.collection("Messages").insertOne(newMessage);
+    newMessage.id = result.insertedId;
+  } catch (err) {
+    console.log("Could not log the new message to the database");
+    // client.close();
+    res.status(500).json({ message: "Storing message failed" });
+  }
+
+  client.close();
 
   res.status(201).json({
     message: "Successfully stored message",
